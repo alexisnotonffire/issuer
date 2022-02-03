@@ -1,7 +1,10 @@
 name: Issue Labeller
 on:
-  issue:
-    - created
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
