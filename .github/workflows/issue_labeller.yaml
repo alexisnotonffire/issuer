@@ -15,7 +15,8 @@ jobs:
         id: extract-priority
         with:
           text: "${{ github.event.issue.body }}"
-          regex: "Q: Is this important\?\nA: ([^\n]+)"
+          regex: 'Q: Is this important\?\nA: ([^\n]+)'
+          flags: "gm"
       - run: echo "${{ toJSON(steps.extract-priority.outputs) }}"
       - name: label-issue
         uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
