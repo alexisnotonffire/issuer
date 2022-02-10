@@ -15,11 +15,11 @@ jobs:
         id: extract-priority
         with:
           text: "${{ github.event.issue.body }}"
-          regex: 'A: ([^\n]+)'
+          regex: 'Q: Is this important\?[\n\r]+A: ([^\n\r]+)'
           flags: "gm"
       - run: echo "${{ toJSON(steps.extract-priority.outputs) }}"
       - name: label-issue
         uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
         with:
-          add-labels: ${{ steps.extract-priority.outputs.group1 == 'Yes' && 'critical' || 'ignored' }}
+          add-labels: "${{ steps.extract-priority.outputs.group1 == 'Yes' && 'critical' || 'ignored' }}"
           repo-token: ${{ secrets.ACTIONS }}
